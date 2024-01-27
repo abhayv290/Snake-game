@@ -1,0 +1,88 @@
+* {
+
+    color: white;
+    /* background-image: url('https: //th.bing.com/th/id/OIP.8Xdx0h73TTYvbQNfSe5wUgHaEK?pid=ImgDet&w=474&h=266&rs=1'); */
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: slategray;
+}
+
+.flex {
+    display: flex;
+    margin-top: 5rem;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5rem;
+    box-shadow: 5px 5px 12px 5px rgba(1, 1, 28, 0.643);
+    background-color: rgb(3, 3, 27);
+}
+
+h1 {
+    font-size: 2rem;
+    margin: 1rem;
+    letter-spacing: 1px;
+    text-shadow: 23rem rgba(5, 241, 194, 0.596);
+    font-family: fantasy;
+
+}
+
+.input-data {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem;
+
+}
+
+input {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: none;
+    color: black;
+    outline: none;
+    border-radius: 10px;
+}
+
+button {
+    background-color: red;
+    padding: 10px;
+    font-size: large;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    transition: 0.3s ease-in-out;
+
+    &:hover {
+        scale: 1.1;
+        color: antiquewhite
+    }
+
+}
+
+.redirect-login {
+    margin-top: 20px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+
+
+}
+
+.redirect-login span a {
+    cursor: pointer;
+    font-weight: 600;
+
+    &:hover {
+        color: red;
+    }
+}

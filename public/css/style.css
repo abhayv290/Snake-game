@@ -1,0 +1,143 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.body {
+    background: rgba(1, 0, 19, 0.996);
+    min-height: 100vh;
+    background-size: 100vw 100vh;
+    background-repeat: no-repeat;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+/* Navbar styling */
+
+.navbar {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+
+}
+
+.navbar nav {
+    background-color: rgba(18, 6, 235, 0.596);
+    background: transparent;
+}
+
+.navbar nav ul {
+    margin: 10px;
+    list-style: none;
+
+}
+
+@media only screen and (max-width : 600px) {
+    .navbar nav ul {
+        display: flex;
+        justify-content: center;
+    }
+
+    .navbar nav ul li {
+        margin-left: 10px;
+    }
+
+}
+
+@media only screen and (min-width: 850px) and (max-width: 1040px) {
+    .navbar nav ul {
+        display: flex;
+        justify-content: center;
+    }
+
+    .navbar nav ul li {
+        margin-left: 10px;
+    }
+
+    .scoredata {
+        display: flex;
+        position: fixed;
+        top: 0;
+
+    }
+}
+
+.navbar nav ul li a {
+    text-decoration: none;
+
+
+    font-size: large;
+
+    cursor: pointer;
+    color: white;
+
+}
+
+
+.scoredata {
+    background-color: rgb(11, 139, 244);
+    padding: 10px;
+    border: 1px solid rgb(2, 55, 98);
+    box-shadow: 2px 2px 3px 3px rgb(2, 48, 97);
+
+    position: absolute;
+    top: 5rem;
+    right: 100px;
+}
+
+@media only screen and (max-width: 600px) {
+    .scoredata {
+        bottom: 0;
+        top: 80%;
+
+    }
+}
+
+#scoreBox {
+
+    font-size: 39px;
+    font-weight: bold;
+    font-family: 'New Tegomin', serif;
+}
+
+#hiscoreBox {
+
+    font-size: 39px;
+    font-weight: bold;
+    font-family: 'New Tegomin', serif;
+}
+
+#board {
+    background: linear-gradient(rgb(1, 39, 47), rgb(12, 1, 26));
+    width: 90vmin;
+    height: 92vmin;
+    box-shadow: 10px 10px 5px 5px rgb(2, 48, 97);
+    /* border: 2px solid black; */
+    display: grid;
+    grid-template-rows: repeat(18, 1fr);
+    grid-template-columns: repeat(18, 1fr);
+}
+
+.head {
+    background: radial-gradient(rgb(246, 5, 5), rgb(239, 239, 233));
+    border: 5px solid rgba(227, 5, 5, 0.575);
+    transform: scale(1.02);
+    border-radius: 10px;
+
+}
+
+.snake {
+    background-color: rgba(2, 33, 2, 0.952);
+    border: .25vmin solid white;
+    border-radius: 12px;
+}
+
+.food {
+    background: linear-gradient(red, purple);
+    border: .25vmin solid black;
+    border-radius: 8px;
+}
