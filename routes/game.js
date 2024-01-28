@@ -1,6 +1,6 @@
 import express from 'express';
 import gameData from '../models/gameData.js';
-import User from '../models/User.js';
+
 const router = express.Router();
 import isLogin from '../middleware/isLogin.js';
 
@@ -32,7 +32,7 @@ router.post('/score', isLogin, async (req, res) => {
 
 })
 
-//Api for fetching the Data from the server
+//Api for fetching the Data from the server based on the user
 
 router.get('/fetchscore', isLogin, async (req, res) => {
     const userInfo = req.session.id;
@@ -40,9 +40,9 @@ router.get('/fetchscore', isLogin, async (req, res) => {
 
         if (userInfo) {
             const scoreinfo = await gameData.find({user: userInfo});
-            const username = await User.findById(userInfo).select('username');
-            if (scoreinfo && username) {
-                res.json({success: true, username: username, data: {scoreinfo}});
+
+            if (scoreinfo) {
+                res.json({success: true, username: req.session.cookie, data: {scoreinfo}});
             } else {
                 res.send('database error')
             }
