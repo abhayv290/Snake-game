@@ -47,7 +47,7 @@ async function fetchScore() {
 } fetchScore();
 
 
-//Fetching leaderboard  for the ranking the best user (Status Pending )
+//Fetching leaderboard  for the ranking the best user 
 async function fetchLeaderbrd() {
     const getscore = document.getElementById('leaderbrd');
     const url = 'http://localhost:3000/game/fetchleaderboard'
