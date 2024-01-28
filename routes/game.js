@@ -1,5 +1,6 @@
 import express from 'express';
 import gameData from '../models/gameData.js';
+import User from '../models/User.js';
 const router = express.Router();
 import isLogin from '../middleware/isLogin.js';
 
@@ -13,13 +14,14 @@ router.post('/score', isLogin, async (req, res) => {
 
         const userInfo = req.session.id;
         if (userInfo) {
+
             const data = await gameData.create({
                 user: userInfo,
-                score: score
+                score: parseInt(score)
             })
             res.json({success: true, data: data});
         } else {
-            res.status(500).send('Internal server Error');
+            res.status(400).send('Path score is required');
         }
     } catch (error) {
         console.log(error);
@@ -36,8 +38,9 @@ router.get('/fetchscore', isLogin, async (req, res) => {
 
         if (userInfo) {
             const scoreinfo = await gameData.find({user: userInfo});
-            if (scoreinfo) {
-                res.json({success: true, data: {scoreinfo}});
+            const username = await User.findById(userInfo).select('username');
+            if (scoreinfo && username) {
+                res.json({success: true, username: username, data: {scoreinfo}});
             } else {
                 res.send('database error')
             }

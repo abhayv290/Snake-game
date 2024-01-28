@@ -38,11 +38,21 @@ app.use('/game', gameRoute);
 
 
 
+
+
 // Creating the Routing for frontEnd /Client
-
-
 app.get('/', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'public', 'html', 'index.html'), (err) => {
+        if (err) {
+            console.log('File not sent:', err);
+            res.send('File not sent');
+        } else {
+            console.log('File sent successfully');
+        }
+    });
+});
+app.get('/me', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'public', 'html', 'me.html'), (err) => {
         if (err) {
             console.log('File not sent:', err);
             res.send('File not sent');

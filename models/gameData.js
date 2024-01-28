@@ -6,13 +6,13 @@ const data = new Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user',
-
     },
     score: {
         type: String, required: true
-
     }
 }, {timestamps: true})
+
+
 
 
 export default mongoose.models.gameData || mongoose.model('gameData', data);

@@ -11,20 +11,55 @@ let snakeArr = [
     {x: 13, y: 15}
 ];
 
-console.log(location.pathname);
 
+
+
+//Function for hilights the opened tab
+function navtab() {
+    const navitem = document.getElementsByClassName('navitem');
+    location.pathname == '/' ? navitem[0].style.color = 'red' : 'white';
+    location.pathname == '/login' ? navitem[1].style.color = 'red' : 'white';
+    location.pathname == '/me' ? navitem[2].style.color = 'red' : 'white';
+}
+
+navtab();
 food = {x: 6, y: 7};
 
 // Game Functions
 function main(ctime) {
     window.requestAnimationFrame(main);
-    // console.log(ctime)
+
     if ((ctime - lastPaintTime) / 1000 < 1 / speed) {
         return;
     }
     lastPaintTime = ctime;
     gameEngine();
 }
+//function for handle storing the score into the database
+async function handlescore(myscore) {
+    const score = String(myscore);
+    console.log(score, typeof (score));
+    const url = 'http://localhost:3000/game/score';
+    try {
+        const request = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({score: score}),
+        });
+        if (request.ok) {
+            const json = await request.json();
+            console.log(json);
+        } else {
+            throw new Error("Something went wrong");
+        }
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+
 
 function isCollide(snake) {
     // If you bump into yourself 
@@ -47,9 +82,11 @@ function gameEngine() {
         gameOverSound.play();
         musicSound.pause();
         inputDir = {x: 0, y: 0};
-        console.log(score);
-        score = 0;
+        let myscore = score
+        handlescore(myscore);
         alert("Game Over. Press any key to play again!");
+        score = 0;
+
         snakeArr = [{x: 13, y: 15}];
         musicSound.play();
     }
@@ -114,6 +151,7 @@ if (hiscore === null) {
 }
 else {
     hiscoreval = JSON.parse(hiscore);
+
     hiscoreBox.innerHTML = "HiScore: " + hiscore;
 }
 
@@ -123,25 +161,25 @@ window.addEventListener('keydown', e => {
     moveSound.play();
     switch (e.key) {
         case "ArrowUp":
-            console.log("ArrowUp");
+
             inputDir.x = 0;
             inputDir.y = -1;
             break;
 
         case "ArrowDown":
-            console.log("ArrowDown");
+
             inputDir.x = 0;
             inputDir.y = 1;
             break;
 
         case "ArrowLeft":
-            console.log("ArrowLeft");
+
             inputDir.x = -1;
             inputDir.y = 0;
             break;
 
         case "ArrowRight":
-            console.log("ArrowRight");
+
             inputDir.x = 1;
             inputDir.y = 0;
             break;

@@ -55,9 +55,22 @@ router.post('/login', async (req, res) => {
     }
 })
 
+//Handling the logout option
+router.get('/logout', (req, res) => {
+    // Clear the session data
+    req.session = null;
+    res.redirect('/login');
+});
+
+
+
+
+
+
 //Geting the user info
 router.get('/me', isLogin, async (req, res) => {
-    const userInfo = await User.findById(req.userId).select('-password');
+
+    const userInfo = await User.findById(req.session.id).select('-password');
     if (userInfo) {
         res.json({success: true, user: userInfo});
     } else {

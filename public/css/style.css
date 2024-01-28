@@ -68,14 +68,15 @@
 
 .navbar nav ul li a {
     text-decoration: none;
-
-
     font-size: large;
-
     cursor: pointer;
     color: white;
-
+    font-weight: 600;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+
+
 
 
 .scoredata {
