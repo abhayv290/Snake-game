@@ -4,6 +4,7 @@ const foodSound = new Audio('music/food.mp3');
 const gameOverSound = new Audio('music/gameover.mp3');
 const moveSound = new Audio('music/move.mp3');
 const musicSound = new Audio('music/music.mp3');
+
 let speed = 19;
 let score = 0;
 let lastPaintTime = 0;
@@ -189,17 +190,44 @@ window.addEventListener('keydown', e => {
 
 });
 
-//Handles the Logout option 
-const logoutbtn = document.getElementById('logout-btn');
-logoutbtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    logout();
-})
+
 
 
 async function logout() {
+    confirm('Logout?')
     url = 'http://localhost:3000/auth/logout'
     const response = await fetch(url);
-    logoutbtn.style.display = 'none';
-
 }
+
+
+
+//Fixing the Login and logout btn
+async function fetchUser() {
+    const url = 'http://localhost:3000/auth/me'
+    try {
+
+        const response = await fetch(url);
+        const json = await response.json();
+
+        if (json.success) {
+            const login_tab = document.getElementById('login_tab');
+            login_tab.innerHTML = '<button type="button"  id="logout-btn" class="navitem" >Logout</button>';
+            const logoutbtn = document.getElementById('logout-btn');
+            logoutbtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                logout();
+                const login_tab = document.getElementById('login_tab');
+                login_tab.innerHTML = '<a class="navitem" href="./login">Login</a>'
+            })
+        } else {
+            throw new Error('Login first to access ')
+        }
+    } catch (error) {
+        console.error(error);
+    }
+}
+fetchUser();
+
+
+
+
