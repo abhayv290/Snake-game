@@ -188,3 +188,18 @@ window.addEventListener('keydown', e => {
     }
 
 });
+
+//Handles the Logout option 
+const logoutbtn = document.getElementById('logout-btn');
+logoutbtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    logout();
+})
+
+
+async function logout() {
+    url = 'http://localhost:3000/auth/logout'
+    const response = await fetch(url);
+    logoutbtn.style.display = 'none';
+
+}
