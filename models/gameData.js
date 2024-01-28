@@ -7,6 +7,8 @@ const data = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user',
     },
+    username: {type: String},
+
     score: {
         type: String, required: true
     }

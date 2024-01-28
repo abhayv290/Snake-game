@@ -13,11 +13,13 @@ router.post('/score', isLogin, async (req, res) => {
         const {score} = req.body;
 
         const userInfo = req.session.id;
-        if (userInfo) {
 
+        if (userInfo) {
+            const username = req.session.cookie;
             const data = await gameData.create({
                 user: userInfo,
-                score: parseInt(score)
+                username: username,
+                score: score
             })
             res.json({success: true, data: data});
         } else {
@@ -52,5 +54,29 @@ router.get('/fetchscore', isLogin, async (req, res) => {
         res.status(500).send('Internal server error');
     }
 })
+
+//fetch score for the leaderBoard
+router.get('/fetchleaderboard', isLogin, async (req, res) => {
+    const userinfo = req.session.id;
+
+    try {
+        if (userinfo) {
+            // Assuming gameData.find() returns a promise
+            const scores = await gameData.find().select(['-user', '-_id']);
+
+            if (scores) {
+                res.json({success: true, data: {scores}});
+            } else {
+                res.status(500).send('Scores not found');
+            }
+        } else {
+            res.status(401).send('Login first');
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
 
 export default router;

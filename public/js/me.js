@@ -5,5 +5,21 @@ async function fetchUser() {
     const response = await fetch(url);
     const json = await response.json();
     console.log(json);
+    if (json.success) {
+        const user = document.getElementById('username');
+        const email = document.getElementById('email');
+        user.innerHTML = json.user.username;
+        email.innerHTML = json.user.email_id;
+
+    }
+
 }
 fetchUser();
+
+
+//fetch gameScore for based on the user
+
+
+
+
+

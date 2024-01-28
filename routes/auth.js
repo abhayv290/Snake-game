@@ -18,7 +18,8 @@ router.post('/signup', [body('password').isLength({min: 5})], async (req, res) =
                 email_id: email,
                 password: password,
             })
-            req.session.userId = newUser._id;
+            req.session.id = newUser._id;
+            req.session.cookie = newUser.username;
             res.json({success: true, user: req.session});
 
         }
@@ -44,6 +45,7 @@ router.post('/login', async (req, res) => {
 
         const user = await User.findOne({email_id: email});
         if (user && user.password === password) {
+            req.session.cookie = user.username;
             req.session.id = user._id;
             res.json({success: true, user: req.session});
         } else {
@@ -70,7 +72,7 @@ router.get('/logout', (req, res) => {
 //Geting the user info
 router.get('/me', isLogin, async (req, res) => {
 
-    const userInfo = await User.findById(req.session.id).select('-password');
+    const userInfo = await User.findById(req.UserId).select('-password');
     if (userInfo) {
         res.json({success: true, user: userInfo});
     } else {
