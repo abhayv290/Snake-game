@@ -30,10 +30,10 @@ form {
 h1 {
     font-size: 2rem;
     margin: 1rem;
-    letter-spacing: 1px;
-    text-shadow: 23rem rgba(5, 241, 194, 0.596);
-    font-family: fantasy;
-
+    letter-spacing: 2px;
+    text-shadow: 5rem 5rem 5rem rgba(236, 26, 54, 0.596);
+    font-weight: 700;
+    font-family: Arial, Helvetica, sans-serif
 }
 
 .input-data {
